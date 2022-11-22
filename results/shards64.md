@@ -33,30 +33,30 @@ DEBUG: Worker thread (#20) started
 DEBUG: Worker thread (#21) started
 DEBUG: Worker thread (#22) started
 DEBUG: Worker thread (#23) started
-DEBUG: Worker thread (#2) initialized
-DEBUG: Worker thread (#6) initialized
-DEBUG: Worker thread (#21) initialized
-DEBUG: Worker thread (#0) initialized
-DEBUG: Worker thread (#7) initialized
-DEBUG: Worker thread (#3) initialized
-DEBUG: Worker thread (#4) initialized
+DEBUG: Worker thread (#14) initialized
 DEBUG: Worker thread (#5) initialized
-DEBUG: Worker thread (#8) initialized
-DEBUG: Worker thread (#17) initialized
-DEBUG: Worker thread (#18) initialized
-DEBUG: Worker thread (#15) initialized
+DEBUG: Worker thread (#9) initialized
+DEBUG: Worker thread (#3) initialized
 DEBUG: Worker thread (#11) initialized
 DEBUG: Worker thread (#1) initialized
 DEBUG: Worker thread (#16) initialized
-DEBUG: Worker thread (#13) initialized
-DEBUG: Worker thread (#14) initialized
-DEBUG: Worker thread (#10) initialized
-DEBUG: Worker thread (#9) initialized
-DEBUG: Worker thread (#12) initialized
-DEBUG: Worker thread (#22) initialized
-DEBUG: Worker thread (#23) initialized
-DEBUG: Worker thread (#20) initialized
+DEBUG: Worker thread (#4) initialized
+DEBUG: Worker thread (#6) initialized
 DEBUG: Worker thread (#19) initialized
+DEBUG: Worker thread (#10) initialized
+DEBUG: Worker thread (#23) initialized
+DEBUG: Worker thread (#18) initialized
+DEBUG: Worker thread (#0) initialized
+DEBUG: Worker thread (#7) initialized
+DEBUG: Worker thread (#12) initialized
+DEBUG: Worker thread (#13) initialized
+DEBUG: Worker thread (#17) initialized
+DEBUG: Worker thread (#15) initialized
+DEBUG: Worker thread (#20) initialized
+DEBUG: Worker thread (#8) initialized
+DEBUG: Worker thread (#2) initialized
+DEBUG: Worker thread (#21) initialized
+DEBUG: Worker thread (#22) initialized
 Threads started!
 
 Time limit exceeded, exiting...
@@ -65,15 +65,15 @@ Done.
 
 SQL statistics:
     queries performed:
-        read:                            176940
-        write:                           70774
-        other:                           35388
-        total:                           283102
-    transactions:                        17693  (1768.01 per sec.)
-    queries:                             283102 (28289.51 per sec.)
-    ignored errors:                      1      (0.10 per sec.)
+        read:                            190330
+        write:                           76132
+        other:                           38066
+        total:                           304528
+    transactions:                        19033  (1901.96 per sec.)
+    queries:                             304528 (30431.28 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
     reconnects:                          0      (0.00 per sec.)
-DEBUG: 
+DEBUG:
 DEBUG: Query execution statistics:
 DEBUG:     min:                                0.0000s
 DEBUG:     avg:                                0.0000s
@@ -86,18 +86,18 @@ DEBUG:     max:                                0.0000s
 DEBUG:   total:                                0.0000s
 
 Throughput:
-    events/s (eps):                      1768.0069
-    time elapsed:                        10.0073s
-    total number of events:              17693
+    events/s (eps):                      1901.9551
+    time elapsed:                        10.0071s
+    total number of events:              19033
 
 Latency (ms):
-         min:                                    4.73
-         avg:                                   13.57
-         max:                                   75.07
-         95th percentile:                       50.11
-         sum:                               240034.21
+         min:                                    5.62
+         avg:                                   12.61
+         max:                                   65.38
+         95th percentile:                       44.17
+         sum:                               240006.49
 
 Threads fairness:
-    events (avg/stddev):           737.2083/8.48
-    execution time (avg/stddev):   10.0014/0.00
+    events (avg/stddev):           793.0417/8.09
+    execution time (avg/stddev):   10.0003/0.00
 ```

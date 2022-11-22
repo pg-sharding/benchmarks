@@ -1,3 +1,4 @@
+```
 root@denchick-spqr01h:/usr/local/share/sysbench# sysbench  --threads=24 --range-selects=false  --table_size=100000 --auto_inc=false --tables=10 --pgsql-host=localhost --pgsql-port=6432 --db-driver=pgsql --pgsql-user=denchick --pgsql-password=password --pgsql-db=denchick --pgsql-sslmode=disable --verbosity=5 --db-debug=on  --db-ps-mode=disable oltp_read_write.lua run
 sysbench 1.1.0 (using bundled LuaJIT 2.1.0-beta3)
 
@@ -99,3 +100,4 @@ Latency (ms):
 Threads fairness:
     events (avg/stddev):           796.8750/8.65
     execution time (avg/stddev):   10.0005/0.00
+```
