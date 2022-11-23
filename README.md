@@ -2,22 +2,20 @@
 
 ## Test #1
 
-The main goal of the test was to show that adding one more shard is not increasing the query latency. On the one hand, it is very obvious statement but on the other hand we need make sure of this.
+The main goal of the test was to show that adding one more shard is not increasing the query latency. On the one hand, it is a very obvious statement but on the other hand, we need to make sure of this.
 
 ### Setup
 
-In this test I benchmarked an SPQR installation:
+In this test I benchmarked an SPQR installation with only one `spqr-router`:
+- I use `sysbench` and it's out of box OLTP test (see `results/` folder)
+- `sysbench` and `spqr-router` are running on the same host
+- Each shard is PostgreSQL 14 with 8 vCPU, 100% vCPU rate, 32 GB RAM, 100 GB local SSD disk
+- Host with the router has 16 vCPU, 100% vCPU rate, 32 GB RAM, 100 GB local SSD disk
+- I ran this test with [2,4,8,16,32,64,128] shards
 
-- with only one spqr-router
-- using [2,4,8,16,32,64,128] shards
-- using sysbench and its out of box OLTP tests (see `results/` folder)
-- sysbench and spqr-router is running on the same host
-- each shard is PostgreSQL 14 with 8 vCPU, 100% vCPU rate Cascade Lake, 32 GB RAM, 100 GB local SSD disk
-- host with router has 16 vCPU, 100% vCPU rate, 32 GB RAM, 100 GB local SSD disk
+I used `config.py` script to generate the router config and `init.py` to generate the `init.sql` (SQL-like code that creates key ranges).
 
-I used `config.py` script to generate the router config and `init.py` to generate the `init.sql`, SQL-like code that creating  key-ranges.
-
-The router config was like:
+The router config was like this:
 
 ```
 log_level: ERROR
@@ -51,37 +49,38 @@ backend_rules:
     pool_default: false
 shards:
   shard01:
-....
+  ...
 
 ```
 
-For creating shards I used [Yandex Managed Service for PostgreSQL](https://cloud.yandex.com/en/services/managed-postgresql) and its terraform provider, see `main.tf`.
+For creating shards I used [Managed Service for PostgreSQL](https://cloud.yandex.com/en/services/managed-postgresql) and its [terraform provider](https://registry.terraform.io/providers/yandex-cloud/yandex/), see `main.tf`.
 
 ### Results
 
-The query latency is not indeed increased. Test output are stored in `results/` folder.
+The query latency is indeed not increased. Test outputs are stored in `results/` folder.
 
 ## Test #2
 
-The main goal of the test was to compare the query latency with and without using of spqr-router.
+The main goal of the test was to compare the query latency with and without using `spqr-router`.
 
 ### Setup
 
-- I created a Managed PostgreSQL 14 Cluster. 
-- I use sysbench and its out of box OLTP tests (see `results/` folder)
-- sysbench and spqr-router is running on the same host
-- Hosts with the router and with postgres each have 8 vCPU, 100% vCPU rate, 16 GB RAM
+- I created a Managed PostgreSQL 14 Cluster with 8 vCPU, 100% vCPU rate, and 16 GB RAM
+- I use `sysbench` and it's out of box OLTP tests (see `results/` folder)
+- Test data is 100 tables with 10 000 000 rows in each table
+- `sysbench` and `spqr-router` are running on the same host
+- Host with the router has the same resources as Postgres
 
 I made two runs:
 
 1. connecting directly to the cluster
-2. connecting via router.
+2. connecting via the router.
 
 ### Results
 
-Raw postgres could process **591.77 transactions per second **, the router made **505.44 tps.**. The difference is 15%.
-
+Raw Postgres could process **402.42 transactions per second**, and the router made **373.76 tps**. The difference is about 10%. Test outputs are stored in `results/` folder.
 
 ## Test #3
 
-TODO tpc-c test
+TODO TPC-C test
+
