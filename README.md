@@ -10,7 +10,7 @@ In this test I benchmarked an SPQR installation:
 
 - with only one spqr-router
 - using [2,4,8,16,32,64,128] shards
-- using sysbench and its out of box OLTP tests
+- using sysbench and its out of box OLTP tests (see `results/` folder)
 - sysbench and spqr-router is running on the same host
 - each shard is PostgreSQL 14 with 8 vCPU, 100% vCPU rate Cascade Lake, 32 GB RAM, 100 GB local SSD disk
 - host with router has 16 vCPU, 100% vCPU rate, 32 GB RAM, 100 GB local SSD disk
@@ -57,39 +57,30 @@ shards:
 
 For creating shards I used [Yandex Managed Service for PostgreSQL](https://cloud.yandex.com/en/services/managed-postgresql) and its terraform provider, see `main.tf`.
 
-```
-sysbench 
-  --threads=24 
-  --range-selects=false 
-  --table_size=100000 
-  --auto_inc=false 
-  --tables=10 
-  --pgsql-host=localhost 
-  --pgsql-port=6432 
-  --db-driver=pgsql 
-  --pgsql-user=denchick 
-  --pgsql-password=password 
-  --pgsql-db=denchick
-  --pgsql-sslmode=disable
-  --verbosity=5
-  --db-debug=on  
-  --db-ps-mode=disable 
-oltp_read_write.lua run
-```
-
 ### Results
 
 The query latency is not indeed increased. Test output are stored in `results/` folder.
 
-I used sysbench for benchmarking with following parameters:
-
 ## Test #2
 
-The main goal of the test was to compare the query latency when with and without spqr-router.
+The main goal of the test was to compare the query latency with and without using of spqr-router.
 
 ### Setup
 
-TODO
+- I created a Managed PostgreSQL 14 Cluster. 
+- I use sysbench and its out of box OLTP tests (see `results/` folder)
+- sysbench and spqr-router is running on the same host
+- Hosts with the router and with postgres each have 8 vCPU, 100% vCPU rate, 16 GB RAM
+
+I made two runs:
+
+1. connecting directly to the cluster
+2. connecting via router.
+
+### Results
+
+Raw postgres could process **591.77 transactions per second **, the router made **505.44 tps.**. The difference is 15%.
+
 
 ## Test #3
 
